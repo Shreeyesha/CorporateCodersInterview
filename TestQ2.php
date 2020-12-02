@@ -24,13 +24,17 @@ if(isset($_POST["submit"]))
 		$cost_samosa=$price[1];
 		$max_profit=0;
 
-		for($i=1;$i<=$max_vadas;$i++)  //assuming from the example that atleast one of vadapav and samosapav each has to be sold.
+		for($i=0;$i<=$max_vadas;$i++)
 		{
-			if(($bread-$i<=$max_samosas)&&($bread-$i)>0)
+			if(($bread-$i<=$max_samosas))
 			{
 				$sales=$i*$cost_vada+($bread-$i)*$cost_samosa;
-				$max_profit=max($max_profit,$sales);
 			}
+			else
+			{
+				$sales=$i*$cost_vada+$max_samosa*$cost_samosa;
+			}
+			$max_profit=max($max_profit,$sales);
 		}
 		print "Maximum profit possible: ".($max_profit);
 	}
