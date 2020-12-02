@@ -32,7 +32,7 @@ if(isset($_POST["submit"]))
 			}
 			else
 			{
-				$sales=$i*$cost_vada+$max_samosa*$cost_samosa;
+				$sales=$i*$cost_vada+$max_samosas*$cost_samosa;
 			}
 			$max_profit=max($max_profit,$sales);
 		}
