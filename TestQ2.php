@@ -15,28 +15,50 @@ if(isset($_POST["submit"]))
 	{
 		$ingredients=explode(" ", $_POST["ingre"]);
 		$price=explode(" ", $_POST["price"]);
+
 		$bread=intdiv($ingredients[0], 2);
 		$vadas=$ingredients[1];
 		$samosas=$ingredients[2];
+
 		$max_vadas=min($bread,$vadas);
 		$max_samosas=min($bread,$samosas);
-		$cost_vada=$price[0];
-		$cost_samosa=$price[1];
-		$max_profit=0;
 
-		for($i=0;$i<=$max_vadas;$i++)
+		$cost_vada=$price[0]; 
+		$cost_samosa=$price[1]; 
+
+	
+
+		if($cost_vada>$cost_samosa)
 		{
-			if(($bread-$i<=$max_samosas))
+			$sales=$max_vadas*$cost_vada;
+
+
+			if(($bread-$max_vadas<=$max_samosas))
 			{
-				$sales=$i*$cost_vada+($bread-$i)*$cost_samosa;
+				$sales=$sales+($bread-$max_vadas)*$cost_samosa;
 			}
 			else
 			{
-				$sales=$i*$cost_vada+$max_samosas*$cost_samosa;
+				$sales=$sales+$max_samosas*$cost_samosa;
 			}
-			$max_profit=max($max_profit,$sales);
 		}
-		print "Maximum profit possible: ".($max_profit);
+		else
+		{
+			$sales=$max_samosas*$cost_samosa;
+
+
+			if(($bread-$max_samosas<=$max_vadas))
+			{
+				$sales=$sales+($bread-$max_samosas)*$cost_vada;
+			}
+			else
+			{
+				$sales=$sales+$max_vadas*$cost_vada;
+			}
+		}
+
+
+		print "Maximum profit possible: ".($sales);
 	}
 ?> 	
 </body>
